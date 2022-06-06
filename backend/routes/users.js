@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var mysql = require('mysql2')
 
 // Hämtar hem alla Posts
 router.get('/', function(req, res, next) {
@@ -19,12 +20,40 @@ router.get('/', function(req, res, next) {
   })
 });
 
+const connection = mysql.createConnection({
+  host: "localhost",
+  port: "3306",
+  user: "notesdb",
+  password: "test",
+  database: "notesdb",
+})
+
 // Lägger till nya Posts
+router.post('/add', async (req, res) => {
+  try {
+    connection.execute(
+      "INSERT INTO Posts (title, description, date) VALUES (?, ?, ?)",
+      [req.body.title, req.body.description, req.body.date],
+      (err, result)=>{
+        if(err){ return res.json(err) }
+        console.log(result);
+        res.json('Ny Post sparad')
+      }
+    )
+  }catch(err){
+    console.log(err)
+    res.json(err.message)
+  }
+})
 
 // Ändra gammal Posts // PUT
-
-// DELETE Posts ändra till att inte synas
-
+router.put('/:id', function(req,res,next){
+    connection.findByIdAndUpdate({id: req.params.id}, req.body).then(function(){
+      connection.findOne({id: req.params.id}).then(function(connection){
+        res.send(connection);
+      })
+  })
+})
 
 
 module.exports = router;

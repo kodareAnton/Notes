@@ -8,6 +8,7 @@ import { AllPosts } from './components/AllPosts';
 import { Structure } from './components/Structure';
 import { Loggin } from './components/Loggin';
 import { ReadPost } from './components/readPost';
+import { ChangePost } from './components/changePost';
 
 
 
@@ -22,6 +23,7 @@ root.render(
         <Route index element={<Loggin/>}/>
         <Route path='/AllPosts' element={<AllPosts/>}/>
         <Route path='/AllPosts/:id' element={<ReadPost/>}/>
+        <Route path='/AllPosts/changePost/:id' element={<ChangePost/>}/>
       </Route>
     </Routes>
     </BrowserRouter>

@@ -3,13 +3,18 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { IPost } from "../models/Ipost";
 import { Post } from "../models/Post";
+import { Editor } from "@tinymce/tinymce-react"
 
-export const ReadPost = () =>{
+export const ChangePost = () =>{
 
     const [Post, setPost] = useState<Post>();
     const [PostId, setPostId] = useState(0);
     
     // omvandlar till objekt
+    let PostArray = Post
+    let PostObject = {...PostArray}
+
+    console.log(PostObject);
 
     // skickar id
     let params = useParams();
@@ -36,7 +41,7 @@ export const ReadPost = () =>{
     }, [PostId]);
 
     return <> 
-    <h1>Visa</h1>
-    <h2></h2>
+    <h1>Ändra</h1>
+    <Editor/>
 </>
 }

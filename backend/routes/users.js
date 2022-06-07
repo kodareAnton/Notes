@@ -15,9 +15,22 @@ router.get('/', function(req, res, next) {
         console.log(err);
       }
       console.log('result', result);
-      res.send(result)
+
+      res.send()
     })
   })
+});
+
+// Hämtar saker med hjälp av id
+router.get('/:id', function(req,res){
+  
+  let test = {
+    id: 1,
+    title: 'Anton',
+    description: 'test',
+    date: '2012-09-09'
+  }
+  console.log(test);
 });
 
 const connection = mysql.createConnection({
@@ -47,13 +60,13 @@ router.post('/add', async (req, res) => {
 })
 
 // Ändra gammal Posts // PUT
-router.put('/:id', function(req,res,next){
-    connection.findByIdAndUpdate({id: req.params.id}, req.body).then(function(){
-      connection.findOne({id: req.params.id}).then(function(connection){
-        res.send(connection);
-      })
-  })
-})
+// router.put('/:id', function(req,res,next){
+//     connection.findByIdAndUpdate({id: req.params.id}, req.body).then(function(){
+//       connection.findOne({id: req.params.id}).then(function(connection){
+//         res.send(connection);
+//       })
+//   })
+// })
 
 
 module.exports = router;

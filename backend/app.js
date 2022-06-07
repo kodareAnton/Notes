@@ -5,10 +5,12 @@ var logger = require('morgan');
 var mysql = require('mysql2');
 var cors = require('cors')
 
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
 
 app.locals.con = mysql.createConnection({
     host: "localhost",

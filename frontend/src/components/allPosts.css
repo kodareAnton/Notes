@@ -1,0 +1,11 @@
+.rows {
+    background-color: rgba(110, 149, 207, 0.411);
+    display: flex;
+    justify-content:space-between;
+    margin: 5%;
+}
+
+button {
+    height: 15%;
+    width: 10%;
+}

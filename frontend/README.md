@@ -14,3 +14,6 @@ starta projektet:
 npm start
 
 npm i tinymce
+
+Frontend: localhost 3001
+backend: localhost 3000

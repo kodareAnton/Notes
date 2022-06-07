@@ -7,6 +7,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AllPosts } from './components/AllPosts';
 import { Structure } from './components/Structure';
 import { Loggin } from './components/Loggin';
+import { ReadPost } from './components/readPost';
+
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -18,7 +21,7 @@ root.render(
       <Route path='/' element={<Structure/>}>
         <Route index element={<Loggin/>}/>
         <Route path='/AllPosts' element={<AllPosts/>}/>
-        <Route path='/AllPosts/:id' element={<AllPosts/>}/>
+        <Route path='/AllPosts/:id' element={<ReadPost/>}/>
       </Route>
     </Routes>
     </BrowserRouter>

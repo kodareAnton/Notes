@@ -14,23 +14,28 @@ router.get('/', function(req, res, next) {
       if (err){
         console.log(err);
       }
-      console.log('result', result);
+      console.log('result');
 
-      res.send()
+      res.send(result)
     })
   })
 });
 
 // Hämtar saker med hjälp av id
 router.get('/:id', function(req,res){
-  
-  let test = {
-    id: 1,
-    title: 'Anton',
-    description: 'test',
-    date: '2012-09-09'
-  }
-  console.log(test);
+
+  req.app.locals.con.connect(function (err) {
+    if (err) {
+        console.log(err);
+    }
+    let sql = "SELECT * FROM posts WHERE id IN ('"+ req.params.id +"')"
+    req.app.locals.con.query(sql, function (err, result) {
+        if (err) {
+            console.log(err);
+        }
+        res.json(result)
+    })
+})  
 });
 
 const connection = mysql.createConnection({

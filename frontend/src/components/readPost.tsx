@@ -1,30 +1,20 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { IPost } from "../models/Ipost";
+import { Post } from "../models/Post";
 
 export const ReadPost = () =>{
 
-    class GetPosts{    
-        constructor (
-        public id: string,
-        public title: string,
-        public description: string,
-        public date: string,
-        )
-    {}}
-
-    class post {
-        constructor(
-            public id: string,
-            public title: string,
-            public description: string,
-            public date: string,
-            )
-    {}} 
-
-    const [Post, setPost] = useState<post>();
+    const [Post, setPost] = useState<Post>();
     const [PostId, setPostId] = useState(0);
     
+    // omvandlar till objekt
+    let PostArray = Post
+    let PostObject = {...PostArray}
+
+    console.log(PostObject);
+
     // skickar id
     let params = useParams();
     // sätter id 
@@ -33,6 +23,7 @@ export const ReadPost = () =>{
         setPostId(+params.id);
     }, [])
 
+
      // hämtar från Api
      useEffect(() => {   
         if (PostId === 0) {
@@ -40,7 +31,7 @@ export const ReadPost = () =>{
         }else{
             console.log("rätt");
             axios
-            .get<GetPosts>('http://localhost:3000/users/'+PostId)
+            .get<IPost>('http://localhost:3000/users/'+PostId)
             .then(response => {
             let GetPostsFormApi = response.data
             return setPost(GetPostsFormApi);
@@ -50,6 +41,6 @@ export const ReadPost = () =>{
 
     return <> 
     <h1>hej</h1>
-    <h2>{Post?.title}</h2>
+    <h2>{PostObject.date}</h2>
 </>
 }

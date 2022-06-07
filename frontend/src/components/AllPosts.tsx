@@ -1,52 +1,48 @@
-import { useEffect, useRef, useState } from "react"
-import { Editor } from "@tinymce/tinymce-react"
+import { useEffect, useState } from "react"
 import axios from "axios";
 import './allPosts.css' 
 import { Link } from "react-router-dom";
+import { Post } from "../models/Post";
+import { IPost } from "../models/Ipost";
 
-export function AllPosts(){
+export const AllPosts = () =>{
 
-    // Används för att ta bort från Api
-    class GetBookings{    
-        constructor (
-        public id: string,
-        public title: string,
-        public description: string,
-        public date: string,
-        )
-    {}}
-
-    const [Data, setData] = useState<GetBookings[]>([])
-
+    const [Data, setData] = useState<Post[]>([])
+    console.log(Data);
+    
     // hämtar Api
     useEffect(() => {
         axios
-        .get('http://localhost:3000/users')
+        .get<IPost[]>('http://localhost:3000/users')
         .then(res => {
-            console.log('GEtting from API', res.data);
-            setData(res.data)
-        }).catch(err => console.log('Det blev fel'));
-    }, [])
+            let GetAllPostsFromApi = res.data.map((post: IPost) =>{
+                return new Post(
+                    post.id,
+                    post.title,
+                    post.description,
+                    post.date)
+            });
+            setData(GetAllPostsFromApi)
+        });
+    }, []);
 
     // skriver ut Api i HTML
-    const Api = Data.map((data) => {
-
-        let readFile = `/AllPosts/${data.id}`;
-        console.log(readFile);
+    const Api = Data.map((post: Post) => {
+    let readFile = `/AllPosts/${post.id}`;
+        
         return(
-            <div key={data.id} className="rows">  
+            <div key={post.id} className="rows">  
+            <h1>{post.title}</h1>
+            <p>{post.date}</p>
             <Link to={readFile}>
-            <h1>{data.title}</h1>
+            <button>Visa</button>
             </Link>
             </div>
         )
     });
 
-    const editorRef = useRef();
-
-    return ( <><h1>Loggedin in fungerar</h1>
+    return ( <>
+    <h1>Loggedin in fungerar</h1>
     {Api}
     </>)
-    
-
 }

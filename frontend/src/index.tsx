@@ -1,31 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AllPosts } from './components/AllPosts';
-import { Structure } from './components/Structure';
-import { Loggin } from './components/Loggin';
-import { ReadPost } from './components/readPost';
-import { ChangePost } from './components/changePost';
-
-
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AllPosts } from "./components/AllPosts";
+import { Structure } from "./components/Structure";
+import { Loggin } from "./components/Loggin";
+import { ReadPost } from "./components/readPost";
+import { ChangePost } from "./components/changePost";
+import { NewPost } from "./components/newPost";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<Structure/>}>
-        <Route index element={<Loggin/>}/>
-        <Route path='/AllPosts' element={<AllPosts/>}/>
-        <Route path='/AllPosts/:id' element={<ReadPost/>}/>
-        <Route path='/AllPosts/changePost/:id' element={<ChangePost/>}/>
-      </Route>
-    </Routes>
+      <Routes>
+        <Route path="/" element={<Structure />}>
+          <Route index element={<Loggin />} />
+          <Route path="/AllPosts" element={<AllPosts />} />
+          <Route path="/AllPosts/:id" element={<ReadPost />} />
+          <Route path="/AllPosts/changePost/:id" element={<ChangePost />} />
+          <Route path="/AllPosts/newPost" element={<NewPost />} />
+        </Route>
+      </Routes>
     </BrowserRouter>
   </React.StrictMode>
 );

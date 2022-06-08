@@ -1,68 +1,68 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var mysql = require('mysql2')
+var mysql = require("mysql2");
 
 // Hämtar hem alla Posts
-router.get('/', function(req, res, next) {
-  
-  req.app.locals.con.connect(function(err) {
-    if(err){
+router.get("/", function (req, res, next) {
+  req.app.locals.con.connect(function (err) {
+    if (err) {
       console.log(err);
     }
     let sql = "SELECT * FROM `posts`";
-    req.app.locals.con.query(sql, function(err, result){
-      if (err){
+    req.app.locals.con.query(sql, function (err, result) {
+      if (err) {
         console.log(err);
       }
-      console.log('result');
+      console.log("result");
 
-      res.send(result)
-    })
-  })
+      res.send(result);
+    });
+  });
 });
 
 // Hämtar saker med hjälp av id
-router.get('/:id', function(req,res){
-
+router.get("/:id", function (req, res) {
   req.app.locals.con.connect(function (err) {
     if (err) {
-        console.log(err);
+      console.log(err);
     }
-    let sql = "SELECT * FROM posts WHERE id IN ('"+ req.params.id +"')"
+    let sql = "SELECT * FROM posts WHERE id IN ('" + req.params.id + "')";
     req.app.locals.con.query(sql, function (err, result) {
-        if (err) {
-            console.log(err);
-        }
-        res.json(result)
-    })
-})  
+      if (err) {
+        console.log(err);
+      }
+      res.json(result);
+    });
+  });
 });
 
 const connection = mysql.createConnection({
   host: "localhost",
-  port: "3306",
+  port: "3307",
   user: "notesdb",
   password: "test",
   database: "notesdb",
-})
+});
 
 // Lägger till nya Posts
-router.post('/add', async (req, res) => {
+router.post("/add", async (req, res) => {
   try {
     connection.execute(
       "INSERT INTO Posts (title, description, date) VALUES (?, ?, ?)",
       [req.body.title, req.body.description, req.body.date],
-      (err, result)=>{
-        if(err){ return res.json(err) }
+      (err, result) => {
+        if (err) {
+          return res.json(err);
+        }
         console.log(result);
-        res.json('Ny Post sparad')
+        res.json("Ny Post sparad");
       }
-    )
-  }catch(err){
-    console.log(err)
-    res.json(err.message)
+    );
+  } catch (err) {
+    console.log(err);
+    res.json(err.message);
   }
-})
+});
 
 // Ändra gammal Posts // PUT
 // router.put('/:id', function(req,res,next){
@@ -72,6 +72,5 @@ router.post('/add', async (req, res) => {
 //       })
 //   })
 // })
-
 
 module.exports = router;

@@ -1,40 +1,43 @@
 import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IPost } from "../models/Ipost";
 
 export function NewPost() {
-  //   const editorRef = useRef(null);
-  const log = () => {
-    const testObj = {
-      title: "Jonas",
-      description: "lalalala",
-      date: 20220101,
-    };
-    console.log(testObj);
 
-    const res = axios.post<IPost>(
-      "http://localhost:3000/users/add",
-      {
-        title: "Jonas",
-        description: "lalalala",
-        date: "20220101",
-      },
-      {
-        headers: {},
-      }
-    );
+  interface IPostAPI {
+    title: string;
+    description: string;
+}
 
-    return res.data.headers["Content-Type"]; // text/json
-  };
+const [post, setPost] = useState<IPostAPI>();
+ // Gör en post som vi kan skicka till Api
+ useEffect(() => {
+  setPost({
+      title:'Takaketo ',
+      description: 'hejsan',
+  });  
+}, []);
 
-  //   const log = () => {
-  //     if (editorRef.current) {
-  //       console.log(editorRef.current.getContent());
-  //     }
-  //   };
+useEffect(() => {
+}, [post]);
+
+   // Pushar post som gjorts innan till Api
+   function log(){
+    axios.post<IPostAPI>('http://localhost:3000/users/add', post)
+    .then(res => {
+        console.log(res);   
+    }).catch(err => {
+        console.log(err, 'Du har INTE beställt');
+    });
+
+  }
+
   return (
     <>
+
+
+
       {/* <Editor
         disabled={true}
         apiKey="no-api-key"

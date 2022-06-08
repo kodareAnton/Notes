@@ -38,7 +38,7 @@ router.get("/:id", function (req, res) {
 
 const connection = mysql.createConnection({
   host: "localhost",
-  port: "3307",
+  port: "3306",
   user: "notesdb",
   password: "test",
   database: "notesdb",
@@ -48,8 +48,8 @@ const connection = mysql.createConnection({
 router.post("/add", async (req, res) => {
   try {
     connection.execute(
-      "INSERT INTO Posts (title, description, date) VALUES (?, ?, ?)",
-      [req.body.title, req.body.description, req.body.date],
+      "INSERT INTO Posts (title, description) VALUES (?, ?)",
+      [req.body.title, req.body.description],
       (err, result) => {
         if (err) {
           return res.json(err);

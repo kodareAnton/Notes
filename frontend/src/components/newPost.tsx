@@ -14,8 +14,8 @@ const [post, setPost] = useState<IPostAPI>();
  // Gör en post som vi kan skicka till Api
  useEffect(() => {
   setPost({
-      title:'Takaketo ',
-      description: 'hejsan',
+      title: 'Lousie',
+      description: 'Baka',
   });  
 }, []);
 
@@ -30,14 +30,10 @@ useEffect(() => {
     }).catch(err => {
         console.log(err, 'Du har INTE beställt');
     });
-
   }
 
   return (
     <>
-
-
-
       {/* <Editor
         disabled={true}
         apiKey="no-api-key"

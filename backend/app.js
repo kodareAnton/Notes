@@ -12,7 +12,7 @@ var app = express();
 
 app.locals.con = mysql.createConnection({
   host: "localhost",
-  port: "3306",
+  port: "3307",
   user: "notesdb",
   password: "test",
   database: "notesdb",

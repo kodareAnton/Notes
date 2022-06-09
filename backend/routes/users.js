@@ -38,7 +38,7 @@ router.get("/:id", function (req, res) {
 
 const connection = mysql.createConnection({
   host: "localhost",
-  port: "3306",
+  port: "3307",
   user: "notesdb",
   password: "test",
   database: "notesdb",

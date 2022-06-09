@@ -37,11 +37,5 @@ export const ChangePost = () => {
     }
   }, [PostId]);
 
-  return (
-    <>
-      <h1>Ändra</h1>
-      <Editor />
-      <button>Spara ändringar</button>
-    </>
-  );
+  return <></>;
 };

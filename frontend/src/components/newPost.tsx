@@ -32,11 +32,11 @@ export function NewPost() {
   }
 
   const editorRef = useRef<any>(null);
-  const log = () => {
-    if (editorRef.current) {
-      console.log(editorRef.current.getContent());
-    }
-  };
+  // const log = () => {
+  //   if (editorRef.current) {
+  //     console.log(editorRef.current.getContent());
+  //   }
+  // };
 
   // Hämtar värdena ifrån titel och editorn
   const handleUpdate = (value: string, editor: TinyMCEEditor) => {
@@ -46,7 +46,7 @@ export function NewPost() {
   };
 
   // Gör om värdena till objekt som ska skicka till API
-  const ObjContent = { setTitle, setDescription };
+  const ObjContent = { title, description };
 
   return (
     <>

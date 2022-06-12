@@ -1,12 +1,14 @@
-Installera npm:
-imp i
+Det du behöver göra för att starta projektet:
 
-installera cors:
-npm i cors
+installera nodemon globalt
+installera node
 
-installera sql2
+installationer
+npm i
 npm i sql2
-
+npm i cors
 npm install express-request-id
 
+För mac komando:
 devDependencies installerar allt 
+npm run dev

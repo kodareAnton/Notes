@@ -20,6 +20,8 @@ export const AllPosts = () => {
   }, []);
 
   // skriver ut Api i HTML
+  let NewPost = `/AllPosts/NewPost/`;
+
   const Api = Data.map((post: Post) => {
     let readFile = `/AllPosts/${post.id}`;
     let ChangeFile = `/AllPosts/ChangePost/${post.id}`;
@@ -28,22 +30,25 @@ export const AllPosts = () => {
     return (
       <div key={post.id} className="rows">
         <h2>{post.title}</h2>
-        <p>{post.date}</p>
+  <div className="button">
         <Link to={readFile}>
           <button>Visa</button>
         </Link>
         <Link to={ChangeFile}>
           <button>Ändra</button>
         </Link>
+        </div>
       </div>
     );
   });
 
   return (
     <>
-      <h1>Välkommen!</h1>
+      <h1>Välkommen till dina inlägg!</h1>
       {Api}
-      <button>Skapa nytt inlägg</button>
+      <Link to={NewPost}>
+          <button className="lastbutton">nytt inlägg</button>
+        </Link>
     </>
   );
 };

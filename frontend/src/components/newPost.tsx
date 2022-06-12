@@ -13,8 +13,6 @@ export function NewPost() {
   const [title, setTitle] = useState<string>();
   const [description, setDescription] = useState<string>();
 
-  // Gör en post som vi kan skicka till Api
-
   // Pushar post som gjorts innan till Api
   function SaveContent() {
     if (editorRef.current) {
@@ -32,30 +30,33 @@ export function NewPost() {
   }
 
   const editorRef = useRef<any>(null);
-  // const log = () => {
-  //   if (editorRef.current) {
-  //     console.log(editorRef.current.getContent());
-  //   }
-  // };
 
   // Hämtar värdena ifrån titel och editorn
   const handleUpdate = (value: string, editor: TinyMCEEditor) => {
     setDescription(value);
-    setTitle(value);
     console.log(value);
   };
 
   // Gör om värdena till objekt som ska skicka till API
   const ObjContent = { title, description };
 
+
+  // använder oss av inputs values
+  function SaveTitle(e:ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>){
+    let name:string = e.target.name;
+    if(name == 'title' ){
+        setTitle( e.target.value);
+    }
+  }
+ 
   return (
     <>
       <label htmlFor="title">titel</label>
-      <input type="text" name="title" onChange={SaveContent} />
+      <input type="text" name="title" onChange={SaveTitle} />
+      
       <Editor
         onEditorChange={handleUpdate}
         value={description}
-        // tinymceScriptSrc={process.env.PUBLIC_URL + "/tinymce/tinymce.min.js"}
         onInit={(evt, editor) => (editorRef.current = editor)}
         initialValue={valuesOfPost}
         init={{

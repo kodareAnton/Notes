@@ -10,3 +10,22 @@ h1{
     text-align: center;
     margin: 2%;
 }
+
+button{
+    height: 100%;
+    border: 1px solid black;
+    background-color: rgba(0, 136, 255, 0.286);
+}
+.button{
+    display: flex;
+    justify-content: end;
+}
+.lastbutton{
+    margin: 5%;
+    height: 50px;
+    width: 95%;
+    text-align: center;
+    background-color: rgba(13, 0, 255, 0.532);
+    border: 1px solid black;
+    color: white;
+}

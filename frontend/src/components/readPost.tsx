@@ -3,11 +3,14 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { IPost } from "../models/Ipost";
 import { Post } from "../models/Post";
+import "./readPost.css";
 
 export const ReadPost = () =>{
 
     const [Post, setPost] = useState<Post>();
     const [PostId, setPostId] = useState(0);
+    console.log(PostId);
+    
     
     // omvandlar till objekt
 
@@ -18,7 +21,6 @@ export const ReadPost = () =>{
         if (params.id)
         setPostId(+params.id);
     }, [])
-
 
      // hämtar från Api
      useEffect(() => {   
@@ -37,6 +39,11 @@ export const ReadPost = () =>{
 
     return <> 
     <h1>Visa</h1>
-    <h2></h2>
+
+<div className="post">
+    <h2>{Post?.title}</h2>
+    <p>{Post?.description}</p>
+    <p>Datum som du skrev detta inlägg: {Post?.date}</p>
+    </div>
 </>
 }

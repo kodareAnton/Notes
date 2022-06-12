@@ -38,9 +38,9 @@ router.get("/:id", function (req, res) {
 
 const connection = mysql.createConnection({
   host: "localhost",
-  port: "3307",
-  user: "notesdb",
-  password: "test",
+  port: "8889",
+  user: "root",
+  password: "root",
   database: "notesdb",
 });
 
@@ -65,12 +65,25 @@ router.post("/add", async (req, res) => {
 });
 
 // Ändra gammal Posts // PUT
-// router.put('/:id', function(req,res,next){
-//     connection.findByIdAndUpdate({id: req.params.id}, req.body).then(function(){
-//       connection.findOne({id: req.params.id}).then(function(connection){
-//         res.send(connection);
-//       })
-//   })
-// })
+router.put('/:id', function(req,res,next){
+  try {
+    connection.execute(
+      "UPDATE posts SET title = ?, description = ? WHERE id = ?;",
+      [req.body.title, req.body.description, req.params.id],
+      (err, result) => {
+        if (err) {
+          return res.json(err);
+        }
+        console.log(result);
+        res.json("Ny Post sparad");
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    res.json(err.message);
+  }
+    
+
+});
 
 module.exports = router;

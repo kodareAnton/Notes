@@ -43,6 +43,7 @@ export const ChangePost = () => {
 
   return (
     <>
+    
       <Editor
         // tinymceScriptSrc={process.env.PUBLIC_URL + "/tinymce/tinymce.min.js"}
         onInit={(evt, editor) => (editorRef.current = editor)}

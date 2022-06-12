@@ -8,3 +8,5 @@ installera sql2
 npm i sql2
 
 npm install express-request-id
+
+devDependencies installerar allt 

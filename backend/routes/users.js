@@ -64,7 +64,7 @@ router.post("/add", async (req, res) => {
   }
 });
 
-// Ändra gammal Posts // PUT
+// Ändra Posts // PUT
 router.put('/:id', function(req,res,next){
   try {
     connection.execute(

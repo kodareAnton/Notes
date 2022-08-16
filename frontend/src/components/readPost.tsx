@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { IPost } from "../models/Ipost";
 import { Post } from "../models/Post";
 import "./readPost.css";
+import parse from "html-react-parser"
 
 export const ReadPost = () =>{
 
@@ -37,13 +38,12 @@ export const ReadPost = () =>{
         }
     }, [PostId]);
 
-    return <> 
-    <h1>Visa</h1>
+var string = parse(`<h2>${Post?.title}</h2> <p>${Post?.description}</p> <p>Datum som du skrev detta inlägg: ${Post?.date}</p>`)
 
+return <>
+<h1>Visa</h1>
 <div className="post">
-    <h2>{Post?.title}</h2>
-    <p>{Post?.description}</p>
-    <p>Datum som du skrev detta inlägg: {Post?.date}</p>
-    </div>
+    {string}
+</div>
 </>
 }
